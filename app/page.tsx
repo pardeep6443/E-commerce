@@ -2,7 +2,7 @@ import { Hero } from '@/components/sections/hero';
 import { FeaturedCollections } from '@/components/sections/featured-collections';
 import { ProductGrid } from '@/components/product/product-grid';
 import { sampleProducts, getFeaturedProducts } from '@/lib/products';
-import { Navbar } from '@/components/layout/navbar';
+import Navbar from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { CartDrawer } from '@/components/cart/cart-drawer';
 
