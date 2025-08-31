@@ -29,11 +29,16 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   const { items } = useCart();
   const { items: wishlistItems } = useWishlist();
   const { theme, toggleTheme } = useTheme();
 
   const cartItemsCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -160,7 +165,7 @@ export default function Navbar() {
                 whileTap={{ scale: 0.9 }}
               >
                 <Heart className="h-5 w-5" />
-                {wishlistItems.length > 0 && (
+                {mounted && wishlistItems.length > 0 && (
                   <motion.span
                     className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
                     initial={{ scale: 0 }}
@@ -179,7 +184,7 @@ export default function Navbar() {
                 whileTap={{ scale: 0.9 }}
               >
                 <ShoppingBag className="h-5 w-5" />
-                {cartItemsCount > 0 && (
+                {mounted && cartItemsCount > 0 && (
                   <motion.span
                     className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
                     initial={{ scale: 0 }}
@@ -263,7 +268,7 @@ export default function Navbar() {
                     </button>
                     <button className="flex items-center space-x-3 text-gray-900 dark:text-white hover:text-pink-500 transition-colors duration-200">
                       <Heart className="h-5 w-5" />
-                      <span>Wishlist ({wishlistItems.length})</span>
+                      <span>Wishlist ({mounted ? wishlistItems.length : 0})</span>
                     </button>
                     <button 
                       onClick={toggleTheme}
